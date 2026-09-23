@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="description" content="Aplikasi pencatat stok barang offline">
+  <link rel="manifest" href="manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="StokKu">
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+  <title>StokKu</title>
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>StokKu</h1>
+      <p>Pencatat stok barang</p>
+    </div>
+    <button id="installBtn" class="icon-btn hidden" title="Pasang aplikasi">⬇</button>
+  </header>
+
+  <main>
+    <section id="dashboard" class="page active">
+      <div class="summary-grid">
+        <div class="summary-card"><span>Total Jenis</span><strong id="totalTypes">0</strong></div>
+        <div class="summary-card"><span>Total Stok</span><strong id="totalStock">0</strong></div>
+        <div class="summary-card"><span>Pemasukan</span><strong id="totalIn">0</strong></div>
+        <div class="summary-card"><span>Pengeluaran</span><strong id="totalOut">0</strong></div>
+      </div>
+
+      <div class="section-title">
+        <h2>Stok Barang</h2>
+        <button class="small-btn" onclick="showPage('barang')">Kelola</button>
+      </div>
+      <div id="stockList" class="list"></div>
+
+      <div class="section-title">
+        <h2>Transaksi Terbaru</h2>
+        <button class="small-btn" onclick="showPage('riwayat')">Lihat Semua</button>
+      </div>
+      <div id="recentList" class="list"></div>
+    </section>
+
+    <section id="transaksi" class="page">
+      <h2>Tambah Transaksi</h2>
+      <form id="transactionForm" class="card">
+        <label>Jenis Transaksi</label>
+        <div class="type-switch">
+          <button type="button" class="type-btn active" data-type="in">Pemasukan</button>
+          <button type="button" class="type-btn" data-type="out">Pengeluaran</button>
+        </div>
+
+        <label for="transactionDate">Tanggal</label>
+        <input id="transactionDate" type="date" required>
+
+        <label for="description">Keterangan</label>
+        <textarea id="description" rows="2" placeholder="Contoh: Barang datang dari supplier"></textarea>
+
+        <div class="section-title">
+          <h3>Daftar Barang</h3>
+          <button type="button" class="small-btn" id="addItemBtn">+ Tambah Barang</button>
+        </div>
+        <div id="transactionItems"></div>
+        <datalist id="itemOptions"></datalist>
+
+        <button class="primary-btn" type="submit">Simpan Transaksi</button>
+      </form>
+    </section>
+
+    <section id="barang" class="page">
+      <div class="section-title">
+        <h2>Daftar Barang</h2>
+        <button class="small-btn" id="newItemBtn">+ Barang</button>
+      </div>
+
+      <form id="itemForm" class="card hidden">
+        <label for="itemName">Nama Barang</label>
+        <input id="itemName" type="text" placeholder="Contoh: Pulpen" required>
+        <div class="form-actions">
+          <button type="button" class="secondary-btn" id="cancelItemBtn">Batal</button>
+          <button type="submit" class="primary-btn">Simpan</button>
+        </div>
+      </form>
+
+      <div class="card item-search-box">
+        <label for="barangSearch">Cari Barang</label>
+        <input id="barangSearch" type="search" inputmode="search" placeholder="Masukkan nama barang" autocomplete="off">
+      </div>
+
+      <div id="allStockList" class="list"></div>
+    </section>
+
+    <section id="riwayat" class="page">
+      <div class="section-title">
+        <h2>Riwayat Transaksi</h2>
+        <button class="small-btn danger" id="clearHistoryBtn">Hapus Semua</button>
+      </div>
+      <div class="history-filters card">
+        <label for="historySearch">Cari riwayat</label>
+        <input id="historySearch" type="search" placeholder="Keterangan atau nama barang">
+        <div class="filter-grid">
+          <div>
+            <label for="historyDate">Tanggal</label>
+            <input id="historyDate" type="date">
+          </div>
+          <div>
+            <label for="historyType">Jenis</label>
+            <select id="historyType">
+              <option value="">Semua transaksi</option>
+              <option value="in">Pemasukan</option>
+              <option value="out">Pengeluaran</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="secondary-btn filter-reset" id="resetHistoryBtn">Reset Filter</button>
+      </div>
+      <div id="historyList" class="list"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-page="dashboard">⌂<span>Beranda</span></button>
+    <button class="nav-btn" data-page="transaksi">＋<span>Transaksi</span></button>
+    <button class="nav-btn" data-page="barang">▣<span>Barang</span></button>
+    <button class="nav-btn" data-page="riwayat">☷<span>Riwayat</span></button>
+  </nav>
+
+  <script src="script.js?v=3"></script>
+</body>
+</html>

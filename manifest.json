@@ -1,0 +1,16 @@
+{
+  "name": "StokKu - Pencatat Stok",
+  "short_name": "StokKu",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "stokku",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f7fb",
+  "theme_color": "#2563eb",
+  "description": "Aplikasi pencatat stok barang offline.",
+  "icons": [
+    {"src":"icon.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icon.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
